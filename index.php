@@ -49,8 +49,15 @@ if (@$_SERVER['PATH_INFO']) {
 if (@$_REQUEST['S']) {
     if (@$_REQUEST['B']) {
         // We want to see the BIFE file source.
-        echo '<PRE>';
-        echo htmlentities(join('', file($file)));
+        exec('enscript -q -p - -Ehtml --language=html --color '
+            . escapeshellarg($file), $buffer);
+        $buffer = join("\n", $buffer);
+        $buffer = strstr($buffer, '<PRE>');
+        $buffer = substr($buffer, 0, strpos($buffer, '</PRE>'));
+        $buffer = str_replace(array('<FONT COLOR="', '</FONT>'),
+            array('<SPAN style="color: ', '</SPAN>'), $buffer);
+        echo $buffer;
+        #echo htmlentities(join('', file($file)));
     } else {
         // We want to see the php file source.
         highlight_file($_SERVER['SCRIPT_FILENAME']);
@@ -64,7 +71,24 @@ $template =& new HTML_Template_HIT('templates');
 $parser   =& new BIFE_Parser('BIFE_Translate');
 $page     =& $parser->parseFile($file);
 $parser->__destruct();
-echo $page->render($template);
+// We now see if we want to show the HTML output
+if (@$_REQUEST['H']) {
+        $f = fopen("$file.tmp.html", 'w');
+        fputs($f, $page->render($template));
+        fclose($f);
+        exec('enscript -q -p - -Ehtml --language=html --color '
+            . escapeshellarg("$file.tmp.html"), $buffer);
+        unlink("$file.tmp.html");
+        $buffer = join("\n", $buffer);
+        $buffer = strstr($buffer, '<PRE>');
+        $buffer = substr($buffer, 0, strpos($buffer, '</PRE>'));
+        $buffer = str_replace(array('<FONT COLOR="', '</FONT>'),
+            array('<SPAN style="color: ', '</SPAN>'), $buffer);
+        echo $buffer;
+    //echo '<PRE>' . htmlentities($page->render($template)) . '</PRE>';
+} else {
+    echo $page->render($template);
+}
 // }}}
 
 ?>

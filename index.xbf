@@ -73,9 +73,10 @@
         y armar una pagina web (o similar) solo escribiendo el XML (y
         probablemente los <EM>templates</EM>).
         Sería bueno que los widgets usen a su vez otras bibliotecas de PHP (como
-        <LINK url="http://pear.php.net/">PEAR</LINK>) para hacer el trabajo
-        <EM>sucio</EM>, de manera tal que los widgets se limiten a actuar de
-        nexo entre entre el HTML (o la salida que sea), el XML y la lógica
-        (realizada en su mayor parte por una biblioteca general).
+        <LINK url="http://pear.php.net/"
+        desc="PHP Extension and Application Repository">PEAR</LINK>) para hacer
+        el trabajo <EM>sucio</EM>, de manera tal que los widgets se limiten a
+        actuar de nexo entre entre el HTML (o la salida que sea), el XML y la
+        lógica (realizada en su mayor parte por una biblioteca general).
     </SECTION>
 </PAGE>

@@ -34,9 +34,15 @@ require_once 'BIFE/Translate.php';
 // }}}
 
 // Selects the file to view {{{
-$file = (@$_SERVER['PATH_INFO'] and ($_SERVER['PATH_INFO'] != '/'))
-    ? ".{$_SERVER['PATH_INFO']}"
-    : 'index.xbf';
+if (@$_SERVER['PATH_INFO']) {
+    $file = $_SERVER['PATH_INFO'];
+    // If it ends with a slash it's a directory so we add index.xbf.
+    if (substr($_SERVER['PATH_INFO'], strlen($_SERVER['PATH_INFO'])-1) == '/') {
+        $file .= 'index.xbf';
+    }
+} else {
+    $file = 'index.xbf';
+}
 // }}}
 
 // Looks if we want to show the source {{{

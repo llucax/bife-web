@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
+<!-- $Id -->
+<!-- vim: set expandtab tabstop=4 shiftwidth=4 foldmethod=syntax: -->
 <PAGE title="BIFE - Build It FastEr">
     <SECTION title="Bienvenido a BIFE!">
         <BIFE/> es un <EM>framework</EM> basado en la idea de
         <LINK url="http://www.lunix.com.ar/Bif.php" desc="Build It Fast">Bif</LINK>
         de separar la lógica, el contenidos y el diseño de una aplicación
-        <LINK url="http://www.php.net/" desc="PHP Hypertext Preprocesor">PHP</LINK>
+        <LINK url="http://www.php.net/" desc="PHP: Hypertext Preprocessor">PHP</LINK>
         (típicamente una página web) pero con fuerte énfasis en la velocidad y la
         simplicidad.<BR/>
         <BIFE/> también está fuertemente influido por los
@@ -14,8 +16,8 @@
         de lógica, contenidos y diseño.<BR/>
         La idea es simple, el diseño se genera con <EM>templates</EM> (modulares
         tipo hooks), el contenido a través de XML (simple) y de la lógica se
-        encarga el PHP (transformar el XML según los templates con un poco de
-        magia en el medio).
+        encarga el PHP (transformar el XML según los <EM>templates</EM> con un
+        poco de magia en el medio).
     </SECTION>
     <SECTION title="Objetivos">
         Los objetivos de BIFE son estos (en orden de importancia):
@@ -28,7 +30,7 @@
     </SECTION>
     <SECTION title="El corazón de BIFE">
         <BIFE/> es modular. <BIFE/> en sí (el corazón) consiste en 4 clases,
-        3 de ellas abstractas. Cada tag XML es mapeado por el
+        3 de ellas abstractas. Cada tag XML es traducido por el
         <CLASS name="Parser"/> (única clase no abstracta) a un
         objeto <CLASS name="Widget"/> (cuya clase coincide con el tag). A su
         vez, ese <CLASS name="Widget"/> puede ser un
@@ -36,9 +38,9 @@
         tiene un contenido). De no encontrar una clase para ese tag XML, el
         <CLASS name="Parser"/> puede usar un objeto <CLASS name="Fallback"/>
         que se encargue de resolver el problema.
-        <BIFE/> ni siquiera depende de un sistema de templates particular, la
-        única limitación consiste en usar el mismo objeto template para
-        dibujar todos los <CLASS name="Widget"/>.<BR/>
+        <BIFE/> ni siquiera depende de un sistema de <EM>templates</EM>
+        particular, la única limitación consiste en usar el mismo objeto
+        <EM>template</EM> para dibujar todos los <CLASS name="Widget"/>.<BR/>
         Recordamos que todas estas clases (exceptuando a
         <CLASS name="Parser"/>) son abstractas. Es por esto que para usar
         <BIFE/> es necesario implementarlas antes.
@@ -50,26 +52,27 @@
         <MODULE name="Base"/>, que consiste sólo de 2 clases:
         <CLASS name="Link"/> y <CLASS name="Translate"/>.
         <CLASS name="Link"/> es un <CLASS name="Container"/> (a su vez un
-        <CLASS name="Widget"/>) que se encarga de generar hipervínculos a
+        <CLASS name="Widget"/>) que se encarga de generar hiper-vínculos a
         otras páginas y provee métodos útiles para usar en otros widgets
         que a su vez necesiten generar links.<BR/>
         <CLASS name="Translate"/> es un <CLASS name="Fallback"/> que
-        traduce por medio de templates los tags XML. De no encontrar un
-        template para ese tag, simplemente copia el tag entero (tag, atributos
-        y contenido) a la salida. Esto es suficiente para hacer un sitio web
-        simple, de hecho esta página está hecha con este módulo.<BR/>
+        traduce por medio de <EM>templates</EM> los tags XML. De no encontrar
+        un <EM>template</EM> para ese tag, simplemente copia el tag entero
+        (tag, atributos y contenido) a la salida. Esto es suficiente para hacer
+        un sitio web simple, de hecho esta página está hecha con este módulo.
+        <BR/>
         Este módulo depende de <CLASS name="HIT" package="HTML_Template"/>
-        (Hooks vs IT), un sistema de templates muy rápido y simple hecho
-        especialmente para <BIFE/> que combina lo mejor de los hooks con el
-        sistema de templates <LINK
+        (Hooks vs IT), un sistema de <EM>templates</EM> muy rápido y simple
+        hecho especialmente para <BIFE/> que combina lo mejor de los hooks con
+        el sistema de templates <LINK
         url="http://pear.php.net/manual/en/package.html.php#package.html.html-template-it"
         desc="Integrated Templates">IT</LINK>.
     </SECTION>
     <SECTION title="El Futuro">
         La idea es que en el futuro hayan muchos widgets para bajar y
         y armar una pagina web (o similar) solo escribiendo el XML (y
-        probablemente los templates).
-        Sería bueno que los widgets usen a su vez otras biblioteca de PHP (como
+        probablemente los <EM>templates</EM>).
+        Sería bueno que los widgets usen a su vez otras bibliotecas de PHP (como
         <LINK url="http://pear.php.net/">PEAR</LINK>) para hacer el trabajo
         <EM>sucio</EM>, de manera tal que los widgets se limiten a actuar de
         nexo entre entre el HTML (o la salida que sea), el XML y la lógica
